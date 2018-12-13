@@ -1,0 +1,45 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort>
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="data">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Data </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.date.toDate() | date}} </mat-cell>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="calories">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Calories </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.calories | number}} </mat-cell>
+      </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="duration" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Duration </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.duration | number}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="state">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
+      </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>
+
+  <!-- Paginator -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
